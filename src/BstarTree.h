@@ -1,6 +1,8 @@
 #ifndef _BSTARTREE_H_
 #define _BSTARTREE_H_
 #include <iostream>
+#include <string>
+#include <map>
 #include <vector>
 #include <list>
 #include "cirType.h"
@@ -31,18 +33,22 @@ public:
 private:
 	BTreeNode *_parent, *_lchild, *_rchild;
 	Block*     _block;
-	bool rotate;
+	bool       rotate;
 };
 
 class BTree{
 public:
 	BTree(vector<Block*>& BlockList);
+	~BTree(){clear();}
+	void build(vector<Block*>& BlockList);
+	void clear(){for(size_t i = 0; i < NodeList.size(); ++i) delete NodeList.at(i);}
 
 	// Perturbation
 	bool Pertubation();
 	bool Rotate(BTreeNode* node);
 	bool DelnIns(BTreeNode* del, BTreeNode* ins);
 	bool Swap(BTreeNode* node1, BTreeNode* node2);
+	BTreeNode* getNode(string name){ return (NodeMap.find(name) == NodeMap.end())? NULL : NodeMap[name];}
 	
 	// Packing
 	double updateContour(BTreeNode* Node);
@@ -51,9 +57,10 @@ public:
 
 private:
 	vector<BTreeNode*> NodeList;
+	map<string, BTreeNode*> NodeMap;
 
-	list<ContourNode> ContourLine;
 	double Xmax, Ymax;
+	list<ContourNode> ContourLine;
 	BTreeNode* _root;
 };
 

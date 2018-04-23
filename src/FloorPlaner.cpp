@@ -108,6 +108,14 @@ void FloorPlaner::init(){
 #ifdef DEBUG_pack
 tree->printPacking();
 #endif
+	cout << "--------------------------------------------" << endl;
+	if(!tree->DelnIns(tree->getNode("C"), tree->getNode("A"))) cerr << "DelnIns error!!" << endl;
+	if(!tree->DelnIns(tree->getNode("D"), tree->getNode("B"))) cerr << "DelnIns error!!" << endl;
+	tree->Swap(tree->getNode("B"),tree->getNode("C"));
+	//tree->Rotate(tree->getNode("B"));
+	//if(!tree->DelnIns(tree->getNode("D"), tree->getNode("A"))) cerr << "DelnIns error!!" << endl;
+	tree->Pack();
+	tree->printPacking();
 }
 
 /*****************************************************************************************************/

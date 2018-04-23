@@ -25,7 +25,6 @@ private:
 	map<string, Terminal*> TerminalMap;
 
 	vector<Block*> BlockList;
-
 	vector<Net*> NetList;
 	
 	BTree* tree;
